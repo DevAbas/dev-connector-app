@@ -1,9 +1,31 @@
-const express = require('express');
-const port = process.env.PORT || 5000;
+const express  = require('express');
+const mongoose = require('mongoose');
+const port     = process.env.PORT || 5000;
+
+// Load all api routes
+const users   = require('./routes/api/users');
+const profile = require('./routes/api/profile');
+const posts   = require('./routes/api/posts');
+
 // Initialize express
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello world'))
+// DB Config
+const db = require('./config/keys').mongoURI;
+
+// Connect to MongoDB
+mongoose
+  .connect(db, { useNewUrlParser: true })
+  .then(() => console.log('Connected to DB'))
+  .catch(err => console.log(err));
+
+
+app.get('/', (req, res) => res.send('Hello world'));
+
+// Use Routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+app.use('/api/posts', posts);
 
 // Listen port
-app.listen(() => console.log(`App is runing on port ${port}`))
+app.listen(port, () => console.log(`App is runing on port ${port}`))
