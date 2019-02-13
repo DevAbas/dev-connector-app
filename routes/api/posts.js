@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 /**
-* @route  api/posts/test
+* @route  GET api/posts/test
 * @desc   Tests posts route
-* @method Public
+* @access Public
 **/
 router.get('/test', (req, res) => res.send({ msg: 'Posts Works' }));
 

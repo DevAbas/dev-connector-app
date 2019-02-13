@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 /**
-* @route  api/profile/test
+* @route  GET api/profile/test
 * @desc   Tests profile route
-* @method Public
+* @access Public
 **/
 router.get('/test', (req, res) => res.send({ msg: 'Profile Works' }));
 
